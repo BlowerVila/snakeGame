@@ -1,4 +1,6 @@
-# Aim
+# MyCasualGame 
+
+## Aim
 * Endless mode gameplay
 * Score system
 * Replayable loop
@@ -6,22 +8,26 @@
 * Uses Canvas
 * Uses localStorage
 
-# Gameplay
+  
+## Game Screenshot
+![snakeGame](https://github.com/user-attachments/assets/ccfa4579-957d-4e37-95de-0035596521b8)
+
+
+## Gameplay
 * Avoid the red snake that tries to eat you, and eat orange food to increase your score.
 * The longer your body grows, the richer your colors become!
 
-# Concept
+
+## Concept
 *  Expanding upon the classic Snake game by introducing new mechanics:
   1. Two snakes: one controlled by the player, the other as a disruptive enemy
   2. A food chain mechanic: the player eats food, the enemy eats the player
   3. Several gameplay ideas were planned but not fully implemented
 * Considerations around game balance
 * Coding and deployment process
+  
 
-# Game Screenshot
-![snakeGame](https://github.com/user-attachments/assets/ccfa4579-957d-4e37-95de-0035596521b8)
-
-# Others
+## Others
 * Features not yet implemented:
   * Red snake's angry, hunt, and pause states
   * Speed-up and body-shrink modes
