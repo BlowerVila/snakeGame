@@ -35,6 +35,11 @@
 * Thoughts on balancing and introducing new features:
   * Guidance cues (e.g. the word "YOU")
   * Gradient effects and particle feedback when eating food
+ 
+* Takeaways:
+  * Got a better understanding of how to work with WebGL and Canvas
+  * Learned how to break down ideas into smaller tasks and turn them into code
+  * Went through the process of deploying a project with GitHub Pages
 
 # References
 Myself | ChatGPT
