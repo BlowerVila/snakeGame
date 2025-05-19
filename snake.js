@@ -21,6 +21,7 @@ let enemySnake, enemyDirection;
 const DEBUG = true; // 或 false 發布時關掉
 
 
+// 初始化
 function initGame() {
     snake = [
         { x: 3, y: tileCount - 3 },
@@ -51,11 +52,14 @@ function initGame() {
     draw();
 }
 
+// 開始遊戲
 function startGame() {
     if (isGameRunning) return;
     isGameRunning = true;
     overlay.style.display = "none";
     gameInterval = setInterval(gameLoop, 150);
+
+    restart_btn.style.display = "none";
 }
 
 function gameLoop() {
@@ -66,8 +70,8 @@ function gameLoop() {
 function update() {
     direction = nextDirection;
     const head = {
-      x: (snake[0].x + direction.x + tileCount) % tileCount,
-      y: (snake[0].y + direction.y + tileCount) % tileCount
+        x: (snake[0].x + direction.x + tileCount) % tileCount,
+        y: (snake[0].y + direction.y + tileCount) % tileCount
     };
 
     // 判斷撞牆或自撞
@@ -83,14 +87,14 @@ function update() {
 
     const ateFood = head.x === food.x && head.y === food.y;
     if (ateFood) {
-      score++;
-      // webGL 特效嵌入，與 webglEffect.js 檔案有關
-      triggerWebGLEffect(food.x * tileSize, food.y * tileSize);
+        score++;
+        // webGL 特效嵌入，與 webglEffect.js 檔案有關
+        triggerWebGLEffect(food.x * tileSize, food.y * tileSize);
 
-      food = spawnFood();
-      updateScore();
+        food = spawnFood();
+        updateScore();
     } else {
-      snake.pop();
+        snake.pop();
     }
 
     // 敵人蛇移動邏輯
@@ -99,8 +103,8 @@ function update() {
     checkEnemyHitsPlayer();
 
     if (DEBUG) {
-      console.log("Snake head:", head);
-      console.log("Enemy head:", enemySnake[0]);
+        console.log("Snake head:", head);
+        console.log("Enemy head:", enemySnake[0]);
     }
 }
 
@@ -147,7 +151,7 @@ function draw() {
     if (showYouLabel) {
         const head = snake[0];
         ctx.fillStyle = 'white';
-        ctx.font = 'bold 14px sans-serif';
+        ctx.font = 'bold 12px "Underdog", system-ui, sans-serif';
         ctx.textAlign = 'center';
         ctx.fillText('(YOU)', head.x * tileSize + tileSize / 2, head.y * tileSize - 5);
     }
@@ -157,10 +161,10 @@ function draw() {
 function spawnFood() {
     let newFood;
     do {
-      newFood = {
-        x: Math.floor(Math.random() * tileCount),
-        y: Math.floor(Math.random() * tileCount)
-      };
+        newFood = {
+            x: Math.floor(Math.random() * tileCount),
+            y: Math.floor(Math.random() * tileCount)
+        };
     } while (snake.some(segment => segment.x === newFood.x && segment.y === newFood.y));
     return newFood;
 }
@@ -172,11 +176,25 @@ function updateScore() {
     document.getElementById("best-score").textContent = bestScore;
 }
 
+// 遊戲結束
 function gameOver() {
     clearInterval(gameInterval);
     isGameRunning = false;
-    overlay.innerHTML = `Game Over<br>Score: ${score}<br>Press any key to restart`;
+    overlay.innerHTML = `
+        Game Over<br>Score: ${score}<br>
+        <h1>Press any key to restart<h1><br>
+        <button id="restart_btn" style="display: inline-block;">Restart</button>`;
     overlay.style.display = "flex";
+
+    // 測試新增按鈕在遊戲結束時
+    const restart_btn = document.getElementById("restart_btn");
+    if(restart_btn) console.log("已抓到按鈕");
+    restart_btn.onclick = function(){
+        initGame();
+        startGame();
+        console.log("按下按鈕");
+    }; 
+   
 }
 
 
@@ -225,9 +243,9 @@ function checkEnemyHitsPlayer() {
 // ------ 輸入處理 -------
 document.addEventListener("keydown", (e) => {
     if (!isGameRunning) {
-      initGame();
-      startGame();
-      return;
+        initGame();
+        startGame();
+        return;
     }
     const key = e.key;
     if (key === "ArrowUp" && direction.y === 0) nextDirection = { x: 0, y: -1 };
