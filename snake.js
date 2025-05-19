@@ -66,8 +66,8 @@ function gameLoop() {
 function update() {
     direction = nextDirection;
     const head = {
-    x: (snake[0].x + direction.x + tileCount) % tileCount,
-    y: (snake[0].y + direction.y + tileCount) % tileCount
+      x: (snake[0].x + direction.x + tileCount) % tileCount,
+      y: (snake[0].y + direction.y + tileCount) % tileCount
     };
 
     // 判斷撞牆或自撞
@@ -83,14 +83,14 @@ function update() {
 
     const ateFood = head.x === food.x && head.y === food.y;
     if (ateFood) {
-    score++;
-    // webGL 特效嵌入，與 webglEffect.js 檔案有關
-    triggerWebGLEffect(food.x * tileSize, food.y * tileSize);
+      score++;
+      // webGL 特效嵌入，與 webglEffect.js 檔案有關
+      triggerWebGLEffect(food.x * tileSize, food.y * tileSize);
 
-    food = spawnFood();
-    updateScore();
+      food = spawnFood();
+      updateScore();
     } else {
-    snake.pop();
+      snake.pop();
     }
 
     // 敵人蛇移動邏輯
@@ -99,8 +99,8 @@ function update() {
     checkEnemyHitsPlayer();
 
     if (DEBUG) {
-        console.log("Snake head:", head);
-        console.log("Enemy head:", enemySnake[0]);
+      console.log("Snake head:", head);
+      console.log("Enemy head:", enemySnake[0]);
     }
 }
 
@@ -157,10 +157,10 @@ function draw() {
 function spawnFood() {
     let newFood;
     do {
-    newFood = {
+      newFood = {
         x: Math.floor(Math.random() * tileCount),
         y: Math.floor(Math.random() * tileCount)
-    };
+      };
     } while (snake.some(segment => segment.x === newFood.x && segment.y === newFood.y));
     return newFood;
 }
@@ -225,9 +225,9 @@ function checkEnemyHitsPlayer() {
 // ------ 輸入處理 -------
 document.addEventListener("keydown", (e) => {
     if (!isGameRunning) {
-    initGame();
-    startGame();
-    return;
+      initGame();
+      startGame();
+      return;
     }
     const key = e.key;
     if (key === "ArrowUp" && direction.y === 0) nextDirection = { x: 0, y: -1 };
