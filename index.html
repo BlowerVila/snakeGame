@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Let me eat</title>
+  <title>Snake Game</title>
   <meta name="description" content="Classic snake game with particle effects on canvas.">
 
   <!-- 字體 -->
@@ -12,24 +12,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Underdog&display=swap" rel="stylesheet">
 
   <style>
-    h1 {
+    .gameName {
       font-size: 20px;
       transform: rotate(-90deg);
       position: absolute;
-      left: -90px; top: 150px;
-      color: rgb(130, 136, 143);
-    }
-    /* h1:nth-child(2).li_title{ */
-      /* left: 250px; top: 180px;
-      transform: rotate(90deg);
-      width: 380px; 
-      font-size: 15px;
-      letter-spacing: 0.1rem; */
-    /* } */
-    .li_title{
-      font-size: 18px;
-      letter-spacing: 0.25rem;
-      margin-top: -15px;
+      left: -82px; top: 35px;
       color: rgb(130, 136, 143);
     }
     body {
@@ -37,9 +24,15 @@
       color: #fff;
       font-family: "Underdog", system-ui, sans-serif;
       text-align: center;
-      margin: 100px 0;
+      margin:  0;
       padding: 0;
       width: 100vw;
+      height: 100vh;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
     }
     canvas:not(#effectCanvas) {
       background: #222;
@@ -47,7 +40,9 @@
       margin: 0 auto;
     }
     #score {
-      margin: 1em;
+      margin: 3em;
+      position: absolute;
+      top: -80px; left: -40px;
     }
     #overlay {
       position: absolute;
@@ -61,8 +56,35 @@
       flex-direction: column;
       font-size: 2em;
       color: white;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.5);
       animation: light 1.5s ease-in-out infinite;
+    }
+    h1 {
+      font-size: 40px;
+    }
+    .li_title{
+      font-size: 13px;
+      letter-spacing: 0.25rem;
+      margin-top: -15px;
+      color: rgb(130, 136, 143);
+    }
+    #restart_btn {
+      transition: 0.2s;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 14px;
+      font-size: 20px;
+      font-weight: 500;
+      /* background-color: #1fdaa2; */
+      background: linear-gradient(to bottom,#578cdb 40%, #1781b3 60%);
+      color: #ffffff;
+      letter-spacing: 0.1rem;
+      cursor: pointer;
+      box-shadow: 0 0 10px #327788ea;
+    }
+    #restart_btn:hover {
+      transition: 0.2s;
+      background: linear-gradient(to bottom,#35abc0 40%, #1fdaa2 60%);
     }
 
     @keyframes light{
@@ -80,17 +102,17 @@
 </head>
 <body>
   
-  <div id="score" style="z-index:99">Score: <span id="current-score">0</span> | Best: <span id="best-score">0</span></div>
   <div style="position: relative; width: 400px; height: 400px; margin: auto;">
-    <h1>Food Battle</h1>
-    <!-- <h1 class="li_title">Avoid the enemy snake and eat the food.</h1> -->
+    <h1 class="gameName">Food Battle</h1>
+    <div id="score" style="z-index:99">Score: <span id="current-score">0</span> | Best: <span id="best-score">0</span></div>
     <canvas id="gameCanvas" width="400" height="400" style="position: absolute; top: 0; left: 0; z-index: 0;"></canvas>
     <canvas id="effectCanvas" width="400" height="400" style="position: absolute; top: 0; left: 0; z-index: 1; pointer-events: none;"></canvas>
   </div>
 
   <div id="overlay">
-    <h2>Press any key to start</h2>
+    <h1>Press any key to start</h1>
     <h2 class="li_title">Avoid the enemy snake and eat the food.</h2>
+    <button id="restart_btn" style="display: none;">Restart</button>
   </div>
   <script src="webglEffect.js"></script>
   <script type="module" src="snake.js"></script>
