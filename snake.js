@@ -181,12 +181,13 @@ function gameOver() {
     clearInterval(gameInterval);
     isGameRunning = false;
     overlay.innerHTML = `
-        Game Over<br>Score: ${score}<br>
-        <h1>Press any key to restart<h1><br>
-        <button id="restart_btn" style="display: inline-block;">Restart</button>`;
+        <h1 style="line-height:0.5rem; font-size: 50px; margin-top: 60px;">Game Over</h1>
+        <p style="font-size: 20px; font-weight: 400; line-height:0.5rem;">Score: ${score}</p>
+        <button id="restart_btn" style="display: inline-block; margin-top:50px">Restart</button><br>
+        <p style="font-size: 10px; font-weight: 400; margin-top: -15px; letter-spacing:0.1rem;">Or press any key to restart<p>`;
     overlay.style.display = "flex";
 
-    // 測試新增按鈕在遊戲結束時
+    // 新增按鈕在遊戲結束時
     const restart_btn = document.getElementById("restart_btn");
     if(restart_btn) console.log("已抓到按鈕");
     restart_btn.onclick = function(){
